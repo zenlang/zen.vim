@@ -1,7 +1,7 @@
 # zen.vim
 
 File detection and syntax highlighting for the
-[zen](http://zenlang.org/) programming language.
+[Zen](https://zen-lang.org) programming language.
 
 ## Installation
 
