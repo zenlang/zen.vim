@@ -8,8 +8,8 @@ if exists("b:current_syntax")
 endif
 let b:current_syntax = "zen"
 
-syn keyword zenStorage const var extern packed export pub noalias inline noinline comptime nakedcc stdcallcc volatile allowzero align linksection threadlocal
-syn keyword zenStructure struct enum union error
+syn keyword zenStorage const var extern packed export pub noalias inline noinline comptime nakedcc stdcallcc volatile allowzero align linksection threadlocal vtable terminate
+syn keyword zenStructure struct enum union error interface
 syn keyword zenStatement break return continue asm defer errdefer unreachable try catch async noasync await suspend resume
 syn keyword zenConditional if else switch and or orelse
 syn keyword zenRepeat while for
@@ -44,6 +44,7 @@ syn match zenBuiltinFn "\v\@(shlWithOverflow|shrExact|sizeOf|sqrt|byteSwap|subWi
 syn match zenBuiltinFn "\v\@(truncate|typeId|typeInfo|typeName|typeOf|atomicRmw|bytesToSlice|sliceToBytes)>"
 syn match zenBuiltinFn "\v\@(intToError|errorToInt|intToEnum|enumToInt|setAlignStack|frame|Frame|frameSize|bitReverse|Vector)>"
 syn match zenBuiltinFn "\v\@(sin|cos|exp|exp2|ln|log2|log10|fabs|floor|ceil|trunc|round)>"
+syn match zenBuiltinFn "\v\@(mulAdd|Trap|alignedSizeOf|alignTo|)>"
 
 syn match zenDecNumber display "\<[0-9]\+\%(.[0-9]\+\)\=\%([eE][+-]\?[0-9]\+\)\="
 syn match zenHexNumber display "\<0x[a-fA-F0-9]\+\%([a-fA-F0-9]\+\%([pP][+-]\?[0-9]\+\)\?\)\="
