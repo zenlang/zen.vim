@@ -9,6 +9,6 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
-setlocal suffixesadd=.zig
+setlocal suffixesadd=.zen
 setlocal commentstring=//\ %s
-setlocal makeprg=zig\ build
+setlocal makeprg=zen\ build

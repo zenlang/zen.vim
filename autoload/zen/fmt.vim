@@ -4,8 +4,8 @@
 " Use of this source code is governed by a BSD-style
 " license that can be found in the LICENSE file.
 "
-function! zig#fmt#Format() abort
-  if zig#config#FmtExperimental()
+function! zen#fmt#Format() abort
+  if zen#config#FmtExperimental()
     " Using winsaveview to save/restore cursor state has the problem of
     " closing folds on save:
     "   https://github.com/fatih/vim-go/issues/502
@@ -35,7 +35,7 @@ function! zig#fmt#Format() abort
   " Save cursor position and many other things.
   let l:curw = winsaveview()
 
-  let bin_name = zig#config#FmtCommand()
+  let bin_name = zen#config#FmtCommand()
 
   " Get current position in file
   let current_col = col('.')
@@ -45,18 +45,18 @@ function! zig#fmt#Format() abort
   " will lose our changes.
   silent! execute 'write' expand('%')
 
-  let [l:out, l:err] = zig#fmt#run(bin_name, expand('%'))
+  let [l:out, l:err] = zen#fmt#run(bin_name, expand('%'))
 
   if l:err == 0
-    call zig#fmt#update_file(expand('%'))
-  elseif !zig#config#FmtFailSilently()
+    call zen#fmt#update_file(expand('%'))
+  elseif !zen#config#FmtFailSilently()
     let errors = s:parse_errors(expand('%'), out)
     call s:show_errors(errors)
   endif
 
   let diff_offset = line('$') - orig_line_count
 
-  if zig#config#FmtExperimental()
+  if zen#config#FmtExperimental()
     " restore our undo history
     silent! exe 'rundo ' . tmpundofile
     call delete(tmpundofile)
@@ -80,14 +80,14 @@ function! zig#fmt#Format() abort
 endfunction
 
 " update_file updates the target file with the given formatted source
-function! zig#fmt#update_file(target)
+function! zen#fmt#update_file(target)
   " remove undo point caused via BufWritePre
   try | silent undojoin | catch | endtry
 
   " reload buffer to reflect latest changes
   silent edit!
 
-  let l:listtype = zig#list#Type("ZigFmt")
+  let l:listtype = zen#list#Type("ZenFmt")
 
   " the title information was introduced with 7.4-2200
   " https://github.com/vim/vim/commit/d823fa910cca43fec3c31c030ee908a14c272640
@@ -104,17 +104,17 @@ function! zig#fmt#update_file(target)
   endif
 
   if has_key(l:list_title, "title") && l:list_title['title'] == "Format"
-    call zig#list#Clean(l:listtype)
+    call zen#list#Clean(l:listtype)
   endif
 endfunction
 
 " run runs the gofmt/goimport command for the given source file and returns
 " the output of the executed command. Target is the real file to be formatted.
-function! zig#fmt#run(bin_name, target)
+function! zen#fmt#run(bin_name, target)
   let l:cmd = []
   call extend(cmd, a:bin_name)
   call extend(cmd, [a:target])
-  return zig#util#Exec(l:cmd)
+  return zen#util#Exec(l:cmd)
 endfunction
 
 " parse_errors parses the given errors and returns a list of parsed errors
@@ -141,26 +141,26 @@ endfunction
 " show_errors opens a location list and shows the given errors. If the given
 " errors is empty, it closes the the location list
 function! s:show_errors(errors) abort
-  let l:listtype = zig#list#Type("ZigFmt")
+  let l:listtype = zen#list#Type("ZenFmt")
   if !empty(a:errors)
-    call zig#list#Populate(l:listtype, a:errors, 'Format')
-    echohl Error | echomsg "zig fmt returned error" | echohl None
+    call zen#list#Populate(l:listtype, a:errors, 'Format')
+    echohl Error | echomsg "zen fmt returned error" | echohl None
   endif
 
   " this closes the window if there are no errors or it opens
   " it if there is any
-  call zig#list#Window(l:listtype, len(a:errors))
+  call zen#list#Window(l:listtype, len(a:errors))
 endfunction
 
-function! zig#fmt#ToggleFmtAutoSave() abort
-  if zig#config#FmtAutosave()
-    call zig#config#SetFmtAutosave(0)
-    call zig#util#EchoProgress("auto fmt disabled")
+function! zen#fmt#ToggleFmtAutoSave() abort
+  if zen#config#FmtAutosave()
+    call zen#config#SetFmtAutosave(0)
+    call zen#util#EchoProgress("auto fmt disabled")
     return
   end
 
-  call zig#config#SetFmtAutosave(1)
-  call zig#util#EchoProgress("auto fmt enabled")
+  call zen#config#SetFmtAutosave(1)
+  call zen#util#EchoProgress("auto fmt enabled")
 endfunction
 
 " vim: sw=2 ts=2 et
