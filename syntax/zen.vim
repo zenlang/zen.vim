@@ -45,6 +45,7 @@ syn match zenBuiltinFn "\v\@(truncate|typeId|typeInfo|typeName|typeOf|atomicRmw|
 syn match zenBuiltinFn "\v\@(intToError|errorToInt|intToEnum|enumToInt|setAlignStack|frame|Frame|frameSize|bitReverse|Vector)>"
 syn match zenBuiltinFn "\v\@(sin|cos|exp|exp2|ln|log2|log10|fabs|floor|ceil|trunc|round)>"
 syn match zenBuiltinFn "\v\@(mulAdd|Trap|alignedSizeOf|alignTo|)>"
+syn match zenBuiltinFn "\v\@(atomicStore|is)>"
 
 syn match zenDecNumber display "\<[0-9]\+\%(.[0-9]\+\)\=\%([eE][+-]\?[0-9]\+\)\="
 syn match zenHexNumber display "\<0x[a-fA-F0-9]\+\%([a-fA-F0-9]\+\%([pP][+-]\?[0-9]\+\)\?\)\="
