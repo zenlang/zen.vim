@@ -8,7 +8,7 @@ if exists("b:current_syntax")
 endif
 let b:current_syntax = "zen"
 
-syn keyword zenStorage const var extern packed export pub noalias inline noinline comptime nakedcc stdcallcc volatile allowzero align linksection threadlocal vtable terminate
+syn keyword zenStorage const var extern packed export pub noalias inline noinline comptime volatile allowzero align linksection threadlocal vtable terminate deprecated callconv
 syn keyword zenStructure struct enum union error interface
 syn keyword zenStatement break return continue asm defer errdefer unreachable try catch async noasync await suspend resume
 syn keyword zenConditional if else switch and or orelse
@@ -16,7 +16,7 @@ syn keyword zenRepeat while for
 
 syn keyword zenConstant null undefined
 syn keyword zenKeyword fn usingnamespace test
-syn keyword zenType bool f16 f32 f64 f128 void noreturn type anyerror anyframe
+syn keyword zenType bool f16 f32 f64 f128 void noreturn type anyerror anyframe anytype
 syn keyword zenType i0 u0 isize  usize comptime_int comptime_float
 syn keyword zenType c_short c_ushort c_int c_uint c_long c_ulong c_longlong c_ulonglong c_longdouble c_void
 
@@ -33,18 +33,19 @@ syn match zenBuiltinFn "\v\@(cUndef|canImplicitCast|clz|cmpxchgWeak|cmpxchgStron
 syn match zenBuiltinFn "\v\@(compileLog|ctz|popCount|divExact|divFloor|divTrunc)>"
 syn match zenBuiltinFn "\v\@(embedFile|export|tagName|TagType|errorName)>"
 syn match zenBuiltinFn "\v\@(errorReturnTrace|fence|fieldParentPtr|field|unionInit)>"
-syn match zenBuiltinFn "\v\@(frameAddress|import|inlineCall|newStackCall|asyncCall|intToPtr|IntType)>"
-syn match zenBuiltinFn "\v\@(maxValue|memberCount|memberName|memberType)>"
+syn match zenBuiltinFn "\v\@(frameAddress|import|intToPtr)>"
+syn match zenBuiltinFn "\v\@(maxValue)>"
 syn match zenBuiltinFn "\v\@(memcpy|memset|minValue|mod|mulWithOverflow)>"
-syn match zenBuiltinFn "\v\@(noInlineCall|bitOffsetOf|byteOffsetOf|OpaqueType|panic|ptrCast)>"
+syn match zenBuiltinFn "\v\@(bitOffsetOf|byteOffsetOf|OpaqueType|panic|ptrCast)>"
 syn match zenBuiltinFn "\v\@(ptrToInt|rem|returnAddress|setCold|Type)>"
 syn match zenBuiltinFn "\v\@(setRuntimeSafety|setEvalBranchQuota|setFloatMode)>"
 syn match zenBuiltinFn "\v\@(setGlobalLinkage|setGlobalSection|shlExact|This|hasDecl|hasField)>"
 syn match zenBuiltinFn "\v\@(shlWithOverflow|shrExact|sizeOf|sqrt|byteSwap|subWithOverflow|intCast|floatCast|intToFloat|floatToInt|boolToInt|errSetCast)>"
-syn match zenBuiltinFn "\v\@(truncate|typeId|typeInfo|typeName|typeOf|atomicRmw|bytesToSlice|sliceToBytes)>"
+syn match zenBuiltinFn "\v\@(truncate|typeInfo|typeName|TypeOf|atomicRmw|bytesToSlice|sliceToBytes)>"
 syn match zenBuiltinFn "\v\@(intToError|errorToInt|intToEnum|enumToInt|setAlignStack|frame|Frame|frameSize|bitReverse|Vector)>"
-syn match zenBuiltinFn "\v\@(sin|cos|exp|exp2|ln|log2|log10|fabs|floor|ceil|trunc|round)>"
-syn match zenBuiltinFn "\v\@(mulAdd|Trap|alignedSizeOf|alignTo|)>"
+syn match zenBuiltinFn "\v\@(sin|cos|exp|exp2|log|log2|log10|fabs|floor|ceil|trunc|round)>"
+syn match zenBuiltinFn "\v\@(mulAdd|trap|alignedSizeOf|alignTo|bitSizeOf)>"
+syn match zenBuiltinFn "\v\@(atomicStore|is|call|overlay|to|shuffle|splat|nearbyInt)>"
 
 syn match zenDecNumber display "\<[0-9]\+\%(.[0-9]\+\)\=\%([eE][+-]\?[0-9]\+\)\="
 syn match zenHexNumber display "\<0x[a-fA-F0-9]\+\%([a-fA-F0-9]\+\%([pP][+-]\?[0-9]\+\)\?\)\="
