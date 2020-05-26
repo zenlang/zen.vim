@@ -8,7 +8,7 @@ if exists("b:current_syntax")
 endif
 let b:current_syntax = "zen"
 
-syn keyword zenStorage const var extern packed export pub noalias inline noinline comptime volatile allowzero align linksection threadlocal vtable terminate deprecated callconv
+syn keyword zenStorage const var extern packed export pub noalias inline noinline comptime volatile allowzero align linksection threadlocal vtable terminate deprecated callconv mut
 syn keyword zenStructure struct enum union error interface
 syn keyword zenStatement break return continue asm defer errdefer unreachable try catch async nosuspend await suspend resume
 syn keyword zenConditional if else switch and or orelse
